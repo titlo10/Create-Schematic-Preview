@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "org.example.test.createschematicpreview.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "SchematicTableScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

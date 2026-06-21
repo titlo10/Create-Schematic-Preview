@@ -1,0 +1,8 @@
+{
+  "gui.createschematicpreview.preview.title": "Preview",
+  "gui.createschematicpreview.preview.none": "Select a schematic",
+  "gui.createschematicpreview.preview.loading": "Loading…",
+  "gui.createschematicpreview.preview.empty": "Empty schematic",
+  "gui.createschematicpreview.preview.too_large": "Schematic too large",
+  "gui.createschematicpreview.preview.failed": "Failed to load"
+}
