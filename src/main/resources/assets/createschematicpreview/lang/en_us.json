@@ -4,5 +4,8 @@
   "gui.createschematicpreview.preview.loading": "Loading…",
   "gui.createschematicpreview.preview.empty": "Empty schematic",
   "gui.createschematicpreview.preview.too_large": "Schematic too large",
-  "gui.createschematicpreview.preview.failed": "Failed to load"
+  "gui.createschematicpreview.preview.failed": "Failed to load",
+  "gui.createschematicpreview.tooltip.hold_preview.prefix": "Hold [",
+  "gui.createschematicpreview.tooltip.key_alt": "Alt",
+  "gui.createschematicpreview.tooltip.hold_preview.suffix": "] for Preview"
 }
