@@ -1,5 +1,6 @@
 package dev.titlo10.createschematicpreview.gui;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.platform.Lighting;
@@ -35,6 +36,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 
 import java.util.Locale;
 
@@ -280,9 +284,14 @@ public class SchematicPreviewPanel {
 		ms.mulPose(Axis.YP.rotationDegrees(yaw));
 		ms.translate(-size.getX() / 2.0F, -size.getY() / 2.0F, -size.getZ() / 2.0F);
 
+		int drawFramebuffer = GL11.glGetInteger(GL30.GL_DRAW_FRAMEBUFFER_BINDING);
+		int readFramebuffer = GL11.glGetInteger(GL30.GL_READ_FRAMEBUFFER_BINDING);
+
 		SuperRenderTypeBuffer buffer = DefaultSuperRenderTypeBuffer.getInstance();
 		renderer.render(ms, buffer);
+		restoreFramebuffer(drawFramebuffer, readFramebuffer);
 		buffer.draw();
+		restoreFramebuffer(drawFramebuffer, readFramebuffer);
 
 		ms.popPose();
 
@@ -290,5 +299,12 @@ public class SchematicPreviewPanel {
 		RenderSystem.disableBlend();
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		graphics.disableScissor();
+	}
+
+	private static void restoreFramebuffer(int drawFramebuffer, int readFramebuffer) {
+		if (GL11.glGetInteger(GL30.GL_DRAW_FRAMEBUFFER_BINDING) != drawFramebuffer)
+			GlStateManager._glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, drawFramebuffer);
+		if (GL11.glGetInteger(GL30.GL_READ_FRAMEBUFFER_BINDING) != readFramebuffer)
+			GlStateManager._glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, readFramebuffer);
 	}
 }
